@@ -37,6 +37,7 @@ cmd_images_packer =
   '%<var_packer_command>s' \
   '%<var_command>s' \
   '%<var_entrypoint>s' \
+  '%<var_workdir>s' \
   '%<packer_template_dir>s'
 
 jobs = \
@@ -157,6 +158,11 @@ namespace :images do
                 var_entrypoint = "-var='entrypoint=#{images[image]['entrypoint']}' "
               end
 
+              var_workdir = ''
+              if images[image].key?('workdir')
+                var_workdir = "-var='workdir=#{images[image]['workdir']}' "
+              end
+
               var_packer_command = ''
               if images[image].key?('packer_command')
                 var_packer_command = "-var='packer_command=#{images[image]['packer_command']}' "
@@ -180,6 +186,7 @@ namespace :images do
                   var_packer_command: var_packer_command,
                   var_command: var_command,
                   var_entrypoint: var_entrypoint,
+                  var_workdir: var_workdir,
                   target_repo: target_repo
                 )
               end
