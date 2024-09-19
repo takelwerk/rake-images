@@ -75,6 +75,7 @@ jobs = \
   %i[converge
      destroy
      login
+     reset
      test
      verify]
 
